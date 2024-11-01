@@ -45,7 +45,6 @@ Figma：https://www.figma.com/design/2vnevLG6G0FrXCCLl6vJpZ/%E7%84%A1%E9%A1%8C?n
 - [〇] 記事編集機能
 - [〇] 記事削除機能
 - [〇] タグ投稿機能
-- [〇] タグ編集機
 - [〇] いいね機能
 - [〇] 検索機能
 
