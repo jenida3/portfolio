@@ -1,16 +1,28 @@
 Rails.application.routes.draw do
-  resources :tasks
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # セッション関連のルート
+  resources :sessions, only: [:new, :create, :destroy]
+  
+  # ユーザー関連のルート
+  resources :users, only: [:new, :create]
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # タスク関連のルート
+  resources :tasks
+
+  # ヘルスチェック
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/*
+  # PWA用ルート
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
-  # Defines the root path route ("/")
-  # root "posts#index"
-  root "tasks#index"
+  # 認証関連ルート
+  get 'signup', to: 'users#new', as: 'signup'        # 新規登録ページ
+  post 'signup', to: 'users#create'                  # 新規登録アクション
+  get 'login', to: 'sessions#new', as: 'login'       # ログインページ
+  post 'login', to: 'sessions#create'                # ログインアクション
+  delete 'logout', to: 'sessions#destroy', as: 'logout' # ログアウトアクション
+
+  # トップページをログインページに設定
+  root 'sessions#new'
 end
+
