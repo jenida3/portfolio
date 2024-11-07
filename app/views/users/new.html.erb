@@ -1,3 +1,14 @@
+<% if @user.errors.any? %>
+  <div class="errors">
+    <h2>以下のエラーがあります：</h2>
+    <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <%= form_with(model: @user, local: true) do |form| %>
   <div>
     <%= form.label :nickname, "ニックネーム" %>

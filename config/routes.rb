@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   # セッション関連のルート
-  resources :sessions, only: [ :new, :create, :destroy ]
+  resources :sessions, only: [:new, :create, :destroy]
 
   # ユーザー関連のルート
-  resources :users, only: [ :new, :create ]
+  resources :users, only: [:new, :create]
 
   # タスク関連のルート
   resources :tasks
+
 
   # ヘルスチェック
   get "up" => "rails/health#show", as: :rails_health_check
@@ -25,3 +26,4 @@ Rails.application.routes.draw do
   # トップページをログインページに設定
   root "sessions#new"
 end
+
