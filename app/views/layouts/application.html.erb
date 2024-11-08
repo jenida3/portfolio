@@ -18,12 +18,13 @@
   </head>
 
   <body>
-    <% if flash[:notice] %>
-      <p class="notice" style="background-color: green;"><%= flash[:notice] %></p>
-    <% elsif flash[:alert] %>
-      <p class="alert" style="background-color: red;"><%= flash[:alert] %></p>
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>">
+        <%= message %>
+      </div>
     <% end %>
     
     <%= yield %>
   </body>
 </html>
+
