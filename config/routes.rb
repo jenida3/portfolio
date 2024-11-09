@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # ゲーム関連のルート
   resources :games, only: [ :index, :show ] do
-    resources :posts, only: [ :new, :create ]  # ゲームに関連する投稿の新規作成ルートを追加
+    resources :posts, only: [:create, :edit, :update, :destroy]  # ゲームに関連する投稿の新規作成ルートを追加
   end
 
   # ダッシュボードのルート

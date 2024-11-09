@@ -1,23 +1,33 @@
-<!-- app/views/games/show.html.erb -->
-<h1><%= @game.title %></h1>
-<p><%= @game.description %></p>
+<h1 style="font-size: 2rem; color: #333; margin-bottom: 20px;"><%= @game.title %></h1>
+<p style="font-size: 1.25rem; color: #555; margin-bottom: 30px;"><%= @game.description %></p>
 
+<h2><%= link_to 'タイトル一覧に戻る', dashboard_path, style: "color: #007BFF; text-decoration: none; font-size: 1rem;" %></h2>
 
 <!-- 新しい投稿フォーム -->
 <%= form_with model: [@game, @post], local: true do |f| %>
-  <div>
-    <%= f.text_area :content, required: true %>
+  <div style="margin-bottom: 20px;">
+    <%= f.text_area :content, required: true, placeholder: "ここに投稿内容を入力してください", style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
   </div>
   <div>
-    <%= f.submit '投稿する' %>
-  </div>
-<% end %>
-
-<h2>投稿一覧</h2>
-<% @game.posts.each do |post| %>
-  <div>
-    <p><%= post.content %></p>
+    <%= f.submit '投稿する', style: "background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;" %>
   </div>
 <% end %>
 
-<%= link_to 'ダッシュボードに戻る', dashboard_path %> <!-- ダッシュボードに戻るリンク -->
+<h2 style="margin-top: 30px; font-size: 1.5rem; color: #333;">投稿一覧</h2>
+<div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+  <% @posts.each do |post| %>
+    <div style="background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 10px; padding: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+      <p style="font-size: 1rem; color: #555; margin-bottom: 10px;"><%= post.content %></p>
+      <p style="font-size: 0.875rem; color: #777;">投稿者: <%= post.user.nickname %></p>
+      <p style="font-size: 0.875rem; color: #777;">投稿日: <%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+      
+      <% if post.user == current_user %>
+        <div style="margin-top: 10px; display: flex; gap: 10px;">
+          <%= link_to '編集', edit_game_post_path(@game, post), style: "color: #007BFF; text-decoration: none;" %>
+          <%= link_to '削除', game_post_path(@game, post), data: { turbo_method: :delete, confirm: '本当に削除しますか？' }, style: "color: red; text-decoration: none;" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+

@@ -1,0 +1,12 @@
+<h1>投稿を編集</h1>
+
+<%= form_with(model: [@game, @post], local: true) do |f| %>
+  <div style="margin-bottom: 20px;">
+    <%= f.text_area :content, required: true, style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" %>
+  </div>
+  <div>
+    <%= f.submit "更新する", style: "background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;" %>
+  </div>
+<% end %>
+
+<%= link_to 'キャンセル', game_path(@game), style: "margin-top: 20px; display: inline-block; color: #007BFF; text-decoration: none;" %>
