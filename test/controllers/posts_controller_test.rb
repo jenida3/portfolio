@@ -1,9 +1,8 @@
-require "test_helper"
+#require "test_helper"
 
-class PostsControllerTest < ActionDispatch::IntegrationTest
-  test "should get index" do
-    skip "このテストはまだ準備中です"
-    get posts_index_url
-    assert_response :success
-  end
-end
+#class PostsControllerTest < ActionDispatch::IntegrationTest
+  #test "should get index" do
+    #get posts_index_url
+    #assert_response :success
+  #end
+#end
