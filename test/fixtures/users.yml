@@ -1,0 +1,5 @@
+default_user:
+  email: test@example.com
+  crypted_password: "$2a$12$V1QIOiUvv5jMjatNIXBFE.rUEGrAIgbisewt.a8X5ooVUr5nhD2dq"
+  salt: "<適当なソルト値>"  # Sorcery で必要な場合のみ
+  nickname: TestUser

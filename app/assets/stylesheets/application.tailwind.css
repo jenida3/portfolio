@@ -1,3 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.alert {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
+  
+  .alert-success {
+    background-color: #d4edda; /* 成功メッセージの背景色 */
+    color: #155724; /* 成功メッセージのテキスト色 */
+  }
+  
+  .alert-danger {
+    background-color: #f8d7da; /* エラーメッセージの背景色 */
+    color: #721c24; /* エラーメッセージのテキスト色 */
+  }
