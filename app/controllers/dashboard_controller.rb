@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
   def index
-    # ここにダッシュボードのロジックを書く
-    # 例: @games = Game.all
+    # ゲームタイトルを全て取得
+    @games = Game.all
   end
 end

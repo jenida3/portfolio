@@ -5,4 +5,10 @@
   <p><%= link_to '新規登録', signup_path %></p>
 <% end %>
 
-<!-- 他のダッシュボードコンテンツ --
+<h1>ゲームタイトル一覧</h1>
+<% @games.each do |game| %>
+  <div>
+    <h3><%= link_to game.title, game_path(game) %></h3> <!-- ゲーム詳細ページへのリンク -->
+    <p><%= game.description %></p> <!-- ゲームの説明（任意） -->
+  </div>
+<% end %>

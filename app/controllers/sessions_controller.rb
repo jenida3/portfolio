@@ -1,19 +1,23 @@
 class SessionsController < ApplicationController
   def new
+    # ログインページ
   end
 
   def create
-    user = login(params[:email], params[:password])
-    if user
-      redirect_to dashboard_path, success: "ログインしました"
+    @user = login(params[:email], params[:password])
+
+    if @user
+      flash[:success] = "ログインしました！"
+      redirect_to(session.delete(:return_to) || root_path)  # 元のゲーム詳細ページに戻る、なければトップページ
     else
-      flash.now[:danger] = "ログインに失敗しました" # フラッシュメッセージを設定
-      render :new, status: :unprocessable_entity # HTTPステータスコード422を返す
+      flash.now[:danger] = "ログインに失敗しました"
+      render :new
     end
   end
 
   def destroy
     logout
-    redirect_to root_path, success: "ログアウトしました"
+    flash[:success] = "ログアウトしました"
+    redirect_to root_path
   end
 end

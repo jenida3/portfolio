@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  get "dashboard/index"
+  # ゲーム関連のルート
+  resources :games, only: [ :index, :show ] do
+    resources :posts, only: [ :new, :create ]  # ゲームに関連する投稿の新規作成ルートを追加
+  end
+
+  # ダッシュボードのルート
+  get "dashboard", to: "dashboard#index", as: "dashboard" # ダッシュボードへのルートを追加
 
   # セッション関連のルート
   resources :sessions, only: [ :new, :create, :destroy ]
@@ -16,8 +22,6 @@ Rails.application.routes.draw do
   # PWA用ルート
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-
-  get "dashboard", to: "dashboard#index", as: "dashboard" # ダッシュボードへのルートを追加
 
   # 認証関連ルート
   get "signup", to: "users#new", as: "signup"        # 新規登録ページ

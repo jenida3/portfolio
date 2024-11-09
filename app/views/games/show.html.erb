@@ -1,0 +1,23 @@
+<!-- app/views/games/show.html.erb -->
+<h1><%= @game.title %></h1>
+<p><%= @game.description %></p>
+
+
+<!-- 新しい投稿フォーム -->
+<%= form_with model: [@game, @post], local: true do |f| %>
+  <div>
+    <%= f.text_area :content, required: true %>
+  </div>
+  <div>
+    <%= f.submit '投稿する' %>
+  </div>
+<% end %>
+
+<h2>投稿一覧</h2>
+<% @game.posts.each do |post| %>
+  <div>
+    <p><%= post.content %></p>
+  </div>
+<% end %>
+
+<%= link_to 'ダッシュボードに戻る', dashboard_path %> <!-- ダッシュボードに戻るリンク -->
