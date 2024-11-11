@@ -1,11 +1,17 @@
 Rails.application.routes.draw do
   # ゲーム関連のルート
   resources :games, only: [ :index, :show ] do
-    resources :posts, only: [:create, :edit, :update, :destroy]  # ゲームに関連する投稿の新規作成ルートを追加
+    resources :posts, only: [ :create, :edit, :update, :destroy ] do
+      # いいね機能のルートを追加
+      member do
+        post :toggle_like, to: "likes#toggle"
+      end
+    end
   end
 
   # ダッシュボードのルート
-  get "dashboard", to: "dashboard#index", as: "dashboard" # ダッシュボードへのルートを追加
+  get "dashboard", to: "dashboard#index", as: "dashboard"
+  get "dashboard/search", to: "dashboard#search", as: "dashboard_search"
 
   # セッション関連のルート
   resources :sessions, only: [ :new, :create, :destroy ]
@@ -24,14 +30,12 @@ Rails.application.routes.draw do
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # 認証関連ルート
-  get "signup", to: "users#new", as: "signup"        # 新規登録ページ
-  post "signup", to: "users#create"                  # 新規登録アクション
-  get "login", to: "sessions#new", as: "login"       # ログインページ
-  post "login", to: "sessions#create"                # ログインアクション
-
-  # ログアウトをGETメソッドに変更
-  get "logout", to: "sessions#destroy", as: "logout" # ログアウトアクション
+  get "signup", to: "users#new", as: "signup"
+  post "signup", to: "users#create"
+  get "login", to: "sessions#new", as: "login"
+  post "login", to: "sessions#create"
+  get "logout", to: "sessions#destroy", as: "logout"
 
   # トップページをダッシュボードに設定
-  root "dashboard#index"  # ここを変更
+  root "dashboard#index"
 end

@@ -43,19 +43,19 @@
   }
 
   .login-button {
-    background-color: #0275d8;
+    background-color: #007BFF;
   }
 
   .login-button:hover {
-    background-color: #025aa5;
+    background-color: #0056b3;
   }
 
   .signup-button {
-    background-color: #5cb85c;
+    background-color: #28a745;
   }
 
   .signup-button:hover {
-    background-color: #4cae4c;
+    background-color: #218838;
   }
 
   /* ゲームカード */
@@ -63,6 +63,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
+    justify-content: center;
   }
 
   .game-card {
@@ -71,6 +72,12 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     transition: transform 0.2s, box-shadow 0.2s;
+    height: 150px; /* カードの高さを統一 */
+    display: flex; /* Flexboxを使用して中央揃え */
+    flex-direction: column;
+    justify-content: center; /* 縦方向の中央揃え */
+    align-items: center; /* 横方向の中央揃え */
+    text-align: center; /* テキストを中央揃え */
   }
 
   .game-card:hover {
@@ -79,7 +86,7 @@
   }
 
   .game-card h3 {
-    margin: 0 0 10px;
+    margin: 0;
     font-size: 1.5rem;
     color: #0275d8;
   }
@@ -95,9 +102,33 @@
   }
 
   .game-card p {
-    color: #666;
+    display: none; /* ゲーム説明を非表示にする（必要なら表示） */
+  }
+
+  /* 検索フォーム */
+  .search-form {
+    margin: 20px 0 40px;
+    text-align: center;
+  }
+
+  .search-form select,
+  .search-form button {
+    padding: 10px;
     font-size: 1rem;
-    margin: 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .search-form button {
+    background-color: #0275d8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .search-form button:hover {
+    background-color: #025aa5;
   }
 </style>
 
@@ -112,11 +143,29 @@
 
 <h1>ゲームタイトル一覧</h1>
 
+<!-- 検索フォーム -->
+<div class="search-form">
+  <%= form_with url: dashboard_search_path, method: :get, local: true do |f| %>
+    <div>
+      <%= f.label :game_id, "ゲームを選択してください" %>
+      <%= f.collection_select :game_id, @games, :id, :title, prompt: "ゲームを選択してください", class: "form-select" %>
+    </div>
+    <div style="margin-top: 10px;">
+      <%= f.label :keyword, "キーワードを入力してください" %>
+      <%= f.text_field :keyword, class: "form-control" %>
+    </div>
+    <div style="margin-top: 20px;">
+      <%= f.submit "検索", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
+
+<!-- ゲームカード一覧 -->
 <div class="games-container">
   <% @games.each do |game| %>
     <div class="game-card">
       <h3><%= link_to game.title, game_path(game) %></h3>
-      <p><%= game.description %></p>
     </div>
   <% end %>
 </div>
+

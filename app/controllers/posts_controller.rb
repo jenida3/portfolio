@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
-  before_action :require_login, only: [:create, :edit, :update, :destroy]
-  before_action :set_game, only: [:create, :edit, :update, :destroy]
-  before_action :set_post, only: [:edit, :update, :destroy]
-  before_action :authorize_user, only: [:edit, :update, :destroy]
+  before_action :require_login, only: [ :create, :edit, :update, :destroy ]
+  before_action :set_game, only: [ :create, :edit, :update, :destroy ]
+  before_action :set_post, only: [ :edit, :update, :destroy ]
+  before_action :authorize_user, only: [ :edit, :update, :destroy ]
 
   def create
     @post = @game.posts.build(post_params)
@@ -64,4 +64,3 @@ class PostsController < ApplicationController
     end
   end
 end
-

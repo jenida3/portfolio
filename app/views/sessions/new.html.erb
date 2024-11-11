@@ -1,16 +1,4 @@
 <style>
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-    color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-
   .form-container {
     background-color: white;
     padding: 30px;
@@ -18,6 +6,8 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 400px;
+    margin: 50px auto;
+    font-family: Arial, sans-serif;
   }
 
   .form-container h1 {
@@ -51,7 +41,7 @@
   }
 
   .form-container .submit-btn {
-    background-color: #007BFF;
+    background-color: #007BFF; /* 青色 */
     color: white;
     padding: 10px;
     border: none;
@@ -63,7 +53,7 @@
   }
 
   .form-container .submit-btn:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* 青色の濃い版 */
   }
 
   .form-container .back-link {
@@ -98,4 +88,3 @@
   <% end %>
   <%= link_to '戻る', dashboard_path, class: 'back-link' %>
 </div>
-

@@ -1,0 +1,27 @@
+<h1 style="font-size: 2rem; color: #333; margin-bottom: 20px;">検索結果</h1>
+
+<% if @selected_game %>
+  <h2 style="font-size: 1.5rem; color: #333; margin-bottom: 20px;">選択したゲーム: <%= @selected_game.title %></h2>
+
+  <% if @posts.any? %>
+    <h3 style="font-size: 1.25rem; color: #555; margin-bottom: 20px;">該当する投稿は <%= @posts.count %> 件です。</h3>
+    <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+      <% @posts.each do |post| %>
+        <div style="background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 10px; padding: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+          <p style="font-size: 1rem; color: #555; margin-bottom: 10px;"><strong>投稿内容:</strong> <%= post.content %></p>
+          <p style="font-size: 0.875rem; color: #777;"><strong>投稿者:</strong> <%= post.user.nickname %></p>
+          <p style="font-size: 0.875rem; color: #777;"><strong>投稿日:</strong> <%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p style="font-size: 1.25rem; color: #555; margin-top: 20px;">該当する投稿が見つかりませんでした。</p>
+  <% end %>
+<% else %>
+  <p style="font-size: 1.25rem; color: #d9534f; margin-top: 20px;">選択したゲームが見つかりませんでした。</p>
+<% end %>
+
+<div style="margin-top: 30px;">
+  <%= link_to 'タイトル一覧に戻る', dashboard_path, style: "color: #007BFF; text-decoration: none; font-size: 1rem;" %>
+</div>
+
