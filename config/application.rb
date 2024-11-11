@@ -19,6 +19,6 @@ module Myapp
     # タイムゾーンの設定
     config.time_zone = "Tokyo" # アプリケーションのタイムゾーンを日本時間に設定
     config.active_record.default_timezone = :local # データベースの時間もローカル時間で扱う
+    config.i18n.default_locale = :ja
   end
 end
-

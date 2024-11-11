@@ -1,0 +1,12 @@
+// ボタンの更新
+document.getElementById("like-button-<%= @post.id %>").innerHTML = 
+  `<%= j button_to(
+    @liked ? "いいねを解除" : "いいね",
+    toggle_like_post_path(@post),
+    remote: true,
+    class: "btn btn-primary"
+  ) %>`;
+
+// いいね数の更新
+document.getElementById("like-count-<%= @post.id %>").innerText = 
+  "いいね数: <%= @post.likes.count %>";

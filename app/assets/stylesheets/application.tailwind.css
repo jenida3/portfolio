@@ -13,3 +13,11 @@
     background-color: #f8d7da; /* エラーメッセージの背景色 */
     color: #721c24; /* エラーメッセージのテキスト色 */
   }
+
+  .search-form input[type="text"] {
+    width: 300px; /* 必要に応じて幅を調整 */
+    padding: 10px; /* 内側の余白 */
+    font-size: 1rem; /* フォントサイズ */
+    border: 1px solid #ccc; /* 枠線 */
+    border-radius: 5px; /* 角の丸み */
+  }
