@@ -1,5 +1,4 @@
 <style>
-  /* 全体のスタイル */
   body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -9,7 +8,6 @@
     padding: 20px;
   }
 
-  /* ヘッダー */
   h1 {
     font-size: 2.5rem;
     color: #555;
@@ -17,11 +15,10 @@
     margin-bottom: 30px;
   }
 
-  /* ログイン・ログアウトリンク */
   .auth-buttons {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    justify-content: flex-end; /* 右揃え */
+    gap: 10px; /* ボタン間のスペース */
     margin-bottom: 40px;
   }
 
@@ -58,7 +55,20 @@
     background-color: #218838;
   }
 
-  /* ゲームカード */
+  .google-login-button {
+    background-color: #db4437;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 1rem;
+  }
+
+  .google-login-button:hover {
+    background-color: #a33628;
+  }
+
   .games-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -72,12 +82,12 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     transition: transform 0.2s, box-shadow 0.2s;
-    height: 150px; /* カードの高さを統一 */
-    display: flex; /* Flexboxを使用して中央揃え */
+    height: 150px;
+    display: flex;
     flex-direction: column;
-    justify-content: center; /* 縦方向の中央揃え */
-    align-items: center; /* 横方向の中央揃え */
-    text-align: center; /* テキストを中央揃え */
+    justify-content: center;
+    align-items: center;
+    text-align: center;
   }
 
   .game-card:hover {
@@ -101,11 +111,6 @@
     color: #014c8c;
   }
 
-  .game-card p {
-    display: none; /* ゲーム説明を非表示にする（必要なら表示） */
-  }
-
-  /* 検索フォーム */
   .search-form {
     margin: 20px 0 40px;
     text-align: center;
@@ -136,6 +141,7 @@
   <% if logged_in? %>
     <%= link_to 'ログアウト', logout_path, method: :delete, class: 'logout-button' %>
   <% else %>
+    <%= link_to "Googleでログイン", auth_at_provider_path(:google), class: 'google-login-button' %>
     <%= link_to 'ログイン', login_path, class: 'login-button' %>
     <%= link_to '新規登録', signup_path, class: 'signup-button' %>
   <% end %>
@@ -143,7 +149,6 @@
 
 <h1>ゲームタイトル一覧</h1>
 
-<!-- 検索フォーム -->
 <div class="search-form">
   <%= form_with url: dashboard_search_path, method: :get, local: true do |f| %>
     <div>
@@ -160,7 +165,6 @@
   <% end %>
 </div>
 
-<!-- ゲームカード一覧 -->
 <div class="games-container">
   <% @games.each do |game| %>
     <div class="game-card">
