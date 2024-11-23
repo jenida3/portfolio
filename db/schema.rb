@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_11_071939) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_23_073658) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "authentications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid", unique: true
+    t.index ["user_id"], name: "index_authentications_on_user_id"
+  end
 
   create_table "games", force: :cascade do |t|
     t.string "title"
@@ -58,6 +68,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_071939) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "authentications", "users"
   add_foreign_key "likes", "posts"
   add_foreign_key "likes", "users"
   add_foreign_key "posts", "games"
