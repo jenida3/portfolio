@@ -1,5 +1,4 @@
 <style>
-  /* 全体のスタイル */
   body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
@@ -9,7 +8,6 @@
     padding: 20px;
   }
 
-  /* ヘッダー */
   h1 {
     font-size: 2.5rem;
     color: #555;
@@ -17,11 +15,10 @@
     margin-bottom: 30px;
   }
 
-  /* ログイン・ログアウトリンク */
   .auth-buttons {
     display: flex;
-    justify-content: center;
-    gap: 20px;
+    justify-content: flex-end;
+    gap: 15px;
     margin-bottom: 40px;
   }
 
@@ -34,14 +31,25 @@
     font-size: 1rem;
   }
 
-  .logout-button {
-    background-color: #d9534f;
+  /* マイページリンク強調 */
+  .user-page-button {
+    background-color: #f39c12;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  .logout-button:hover {
-    background-color: #c9302c;
+  .user-page-button:hover {
+    background-color: #e67e22;
+    transform: scale(1.05);
   }
 
+  /* ログイン・新規登録ボタン */
   .login-button {
     background-color: #007BFF;
   }
@@ -58,54 +66,30 @@
     background-color: #218838;
   }
 
-  /* ゲームカード */
-  .games-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 20px;
-    justify-content: center;
-  }
-
-  .game-card {
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    transition: transform 0.2s, box-shadow 0.2s;
-    height: 150px; /* カードの高さを統一 */
-    display: flex; /* Flexboxを使用して中央揃え */
-    flex-direction: column;
-    justify-content: center; /* 縦方向の中央揃え */
-    align-items: center; /* 横方向の中央揃え */
-    text-align: center; /* テキストを中央揃え */
-  }
-
-  .game-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-  }
-
-  .game-card h3 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #0275d8;
-  }
-
-  .game-card h3 a {
+  /* Googleログインボタン */
+  .google-login-button {
+    background-color: #db4437;
+    color: white;
     text-decoration: none;
-    color: inherit;
-    transition: color 0.3s;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    font-size: 1rem;
   }
 
-  .game-card h3 a:hover {
-    color: #014c8c;
+  .google-login-button:hover {
+    background-color: #a33628;
   }
 
-  .game-card p {
-    display: none; /* ゲーム説明を非表示にする（必要なら表示） */
+  /* ログアウトボタン */
+  .logout-button {
+    background-color: #d9534f;
   }
 
-  /* 検索フォーム */
+  .logout-button:hover {
+    background-color: #c9302c;
+  }
+
   .search-form {
     margin: 20px 0 40px;
     text-align: center;
@@ -130,12 +114,56 @@
   .search-form button:hover {
     background-color: #025aa5;
   }
+
+  .games-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .game-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .game-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  }
+
+  .game-card h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #0275d8;
+  }
+
+  .game-card h3 a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+  }
+
+  .game-card h3 a:hover {
+    color: #014c8c;
+  }
 </style>
 
 <div class="auth-buttons">
   <% if logged_in? %>
+    <%= link_to 'マイページ', user_path(current_user), class: 'user-page-button' %>
     <%= link_to 'ログアウト', logout_path, method: :delete, class: 'logout-button' %>
   <% else %>
+    <%= link_to "Googleでログイン", auth_at_provider_path(:google), class: 'google-login-button' %>
     <%= link_to 'ログイン', login_path, class: 'login-button' %>
     <%= link_to '新規登録', signup_path, class: 'signup-button' %>
   <% end %>
@@ -143,7 +171,6 @@
 
 <h1>ゲームタイトル一覧</h1>
 
-<!-- 検索フォーム -->
 <div class="search-form">
   <%= form_with url: dashboard_search_path, method: :get, local: true do |f| %>
     <div>
@@ -160,7 +187,6 @@
   <% end %>
 </div>
 
-<!-- ゲームカード一覧 -->
 <div class="games-container">
   <% @games.each do |game| %>
     <div class="game-card">
