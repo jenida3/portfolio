@@ -1,15 +1,29 @@
-<h3>パスワード再設定</h3>
-<%= form_with model: @user, url: password_reset_path(@token) do |f| %>
+<h2 style="text-align: center; margin-bottom: 20px;">パスワード再設定</h2>
+
+<div style="max-width: 400px; margin: 0 auto; padding: 20px; background: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+  <%= form_with model: @user, url: password_reset_path(@token), local: true do |f| %>
     <%= render 'shared/error_message', object: f.object %>
-	<%= f.label :email %>
-    <%= @user.email %>
 
-    <%= f.label :password %>
-    <%= f.password_field :password %>
+    <div style="margin-bottom: 10px;">
+      <%= f.label :email, "メールアドレス" %><br>
+      <%= f.email_field :email, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px;", readonly: true %>
+    </div>
 
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %>
+    <div style="margin-bottom: 10px;">
+      <%= f.label :password, "新しいパスワード" %><br>
+      <%= f.password_field :password, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px;" %>
+      <p style="color: #888; font-size: 12px; margin-top: 5px;">※ パスワードは6文字以上で入力してください。</p>
+    </div>
 
-    <%= f.submit 'リセット' %>
-<% end %>
+    <div style="margin-bottom: 10px;">
+      <%= f.label :password_confirmation, "パスワード確認" %><br>
+      <%= f.password_field :password_confirmation, style: "width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px;" %>
+    </div>
+
+    <div style="text-align: center;">
+      <%= f.submit "パスワードを更新", style: "background: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; width: 100%;" %>
+    </div>
+  <% end %>
+</div>
+
 

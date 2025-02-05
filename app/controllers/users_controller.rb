@@ -16,6 +16,8 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @posts = @user.posts.order(created_at: :desc)  # ユーザーの投稿を取得
+    @liked_posts = @user.liked_posts.order('likes.created_at DESC')  # ユーザーがいいねした投稿を取得
   end
 
   private
