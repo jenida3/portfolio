@@ -12,4 +12,3 @@ class Post < ApplicationRecord
   # バリデーション (任意)
   validates :content, presence: true, length: { maximum: 300 } # 投稿内容の例
 end
-

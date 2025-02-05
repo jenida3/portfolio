@@ -1,8 +1,8 @@
-Rails.application.config.sorcery.submodules = [:external, :reset_password]
+Rails.application.config.sorcery.submodules = [ :external, :reset_password ]
 
 Rails.application.config.sorcery.configure do |config|
   # External authentication with Google
-  config.external_providers = [:google]
+  config.external_providers = [ :google ]
   config.google.key = Rails.application.credentials.dig(:google, :client_id)
   config.google.secret = Rails.application.credentials.dig(:google, :client_secret)
   config.google.callback_url = "http://localhost:3000/oauth/callback?provider=google"

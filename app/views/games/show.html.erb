@@ -37,8 +37,6 @@
       <!-- 画像の表示 -->
       <% if post.image.attached? %>
         <%= image_tag post.image, style: "max-width: 500px; height: auto; border-radius: 5px;" %>
-      <% else %>
-        <p>画像がありません</p>
       <% end %>
 
       <p style="font-size: 0.875rem; color: #777;">投稿者: <%= post.user.nickname %></p>
