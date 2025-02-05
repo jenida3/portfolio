@@ -1,25 +1,46 @@
+<!-- app/views/games/show.html.erb -->
+
 <h1 style="font-size: 2rem; color: #333; margin-bottom: 20px;"><%= @game.title %></h1>
 <p style="font-size: 1.25rem; color: #555; margin-bottom: 30px;"><%= @game.description %></p>
 
 <h2><%= link_to 'タイトル一覧に戻る', dashboard_path, style: "color: #007BFF; text-decoration: none; font-size: 1rem;" %></h2>
 
 <!-- 新しい投稿フォーム -->
-<!-- 新しい投稿フォーム -->
 <%= form_with model: [@game, @post], local: true, style: "max-width: 600px; margin: 0 auto;" do |f| %>
   <div style="margin-bottom: 20px;">
     <%= f.text_area :content, required: true, placeholder: "ここに投稿内容を入力してください", 
                     style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;" %>
   </div>
+
+  <!-- 画像アップロードフィールド -->
+  <div style="margin-bottom: 20px;">
+    <%= f.file_field :image, accept: 'image/png, image/jpg, image/jpeg', style: "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;", id: "image_input" %>
+  </div>
+
+  <!-- プレビュー画像表示 -->
+  <div id="image_preview" style="margin-top: 20px;">
+    <img id="preview" src="" alt="Image preview" style="max-width: 300px; height: auto; display: none; border-radius: 5px;">
+  </div>
+
   <div style="text-align: center;">
     <%= f.submit '投稿する', style: "background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;" %>
   </div>
 <% end %>
 
+<!-- 投稿一覧 -->
 <h2 style="margin-top: 30px; font-size: 1.5rem; color: #333;">投稿一覧</h2>
 <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
   <% @posts.each do |post| %>
     <div style="background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 10px; padding: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
       <p style="font-size: 1rem; color: #555; margin-bottom: 10px;"><%= post.content %></p>
+      
+      <!-- 画像の表示 -->
+      <% if post.image.attached? %>
+        <%= image_tag post.image, style: "max-width: 500px; height: auto; border-radius: 5px;" %>
+      <% else %>
+        <p>画像がありません</p>
+      <% end %>
+
       <p style="font-size: 0.875rem; color: #777;">投稿者: <%= post.user.nickname %></p>
       <p style="font-size: 0.875rem; color: #777;">投稿日: <%= post.created_at.strftime('%Y/%m/%d %H:%M') %></p>
       
@@ -48,4 +69,23 @@
     </div>
   <% end %>
 </div>
+
+<!-- JavaScript -->
+<script>
+  document.getElementById('image_input').addEventListener('change', function(event) {
+    var file = event.target.files[0];
+    var reader = new FileReader();
+    
+    reader.onload = function(e) {
+      var previewImage = document.getElementById('preview');
+      previewImage.src = e.target.result;
+      previewImage.style.display = 'block';  // 画像を表示
+    }
+    
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+
 

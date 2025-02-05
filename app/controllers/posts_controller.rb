@@ -1,3 +1,4 @@
+# app/controllers/posts_controller.rb
 class PostsController < ApplicationController
   before_action :require_login, only: [ :create, :edit, :update, :destroy ]
   before_action :set_game, only: [ :create, :edit, :update, :destroy ]
@@ -12,7 +13,8 @@ class PostsController < ApplicationController
       flash[:success] = "投稿されました！"
       redirect_to game_path(@game)
     else
-      redirect_to game_path(@game)  # 保存失敗時もリダイレクト
+      flash[:danger] = "投稿に失敗しました"
+      redirect_to game_path(@game)
     end
   end
 
@@ -25,7 +27,8 @@ class PostsController < ApplicationController
       flash[:success] = "投稿を更新しました！"
       redirect_to game_path(@game)
     else
-      redirect_to game_path(@game)  # 更新失敗時もリダイレクト
+      flash[:danger] = "投稿の更新に失敗しました"
+      redirect_to game_path(@game)
     end
   end
 
@@ -38,7 +41,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:content, :image)  # imageを追加
   end
 
   def require_login
