@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   # パスワードリセット関連
-  resources :password_resets, only: [:new, :create, :edit, :update]
+  resources :password_resets, only: [ :new, :create, :edit, :update ]
 
   # ゲームと投稿関連
-  resources :games, only: [:index, :show] do
-    resources :posts, only: [:create, :edit, :update, :destroy] do
+  resources :games, only: [ :index, :show ] do
+    resources :posts, only: [ :create, :edit, :update, :destroy ] do
       member do
         post :toggle_like, to: "likes#toggle"
       end
@@ -16,10 +16,10 @@ Rails.application.routes.draw do
   get "dashboard/search", to: "dashboard#search", as: "dashboard_search"
 
   # セッション管理
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [ :new, :create, :destroy ]
 
   # ユーザー登録
-  resources :users, only: [:new, :create, :show]  # showアクションを追加
+  resources :users, only: [ :new, :create, :show ]  # showアクションを追加
 
   # タスク管理
   resources :tasks
@@ -51,6 +51,3 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 end
-
-
-
