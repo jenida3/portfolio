@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     @user = login(params[:email], params[:password])
     if @user
       flash[:success] = "ログインしました！"  # 成功時のフラッシュメッセージ
-      redirect_to(session.delete(:return_to) || root_path) # 元のページにリダイレクト、またはトップページ
+      redirect_to root_path  # トップページ（または任意の場所）にリダイレクト
     else
       flash.now[:danger] = "ログインに失敗しました。メールアドレスまたはパスワードが間違っています。"  # 失敗時のフラッシュメッセージ
       render :new, status: :unprocessable_entity # 再度ログイン画面を表示（HTTPステータス422を設定）
@@ -21,3 +21,4 @@ class SessionsController < ApplicationController
     redirect_to root_path
   end
 end
+

@@ -6,12 +6,16 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "ユーザー登録が完了しました"  # フラッシュメッセージを設定
+      flash[:success] = "ユーザー登録が完了しました"
       redirect_to root_path
     else
-      flash.now[:danger] = "ユーザー登録に失敗しました"  # フラッシュメッセージを設定
-      render :new, status: :unprocessable_entity  # HTTPステータスコード422を返す
+      flash.now[:danger] = "ユーザー登録に失敗しました"
+      render :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @user = current_user
   end
 
   private
@@ -20,3 +24,4 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :password, :password_confirmation, :nickname)
   end
 end
+

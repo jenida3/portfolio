@@ -17,8 +17,8 @@
 
   .auth-buttons {
     display: flex;
-    justify-content: flex-end; /* 右揃え */
-    gap: 10px; /* ボタン間のスペース */
+    justify-content: flex-end;
+    gap: 15px;
     margin-bottom: 40px;
   }
 
@@ -31,14 +31,25 @@
     font-size: 1rem;
   }
 
-  .logout-button {
-    background-color: #d9534f;
+  /* マイページリンク強調 */
+  .user-page-button {
+    background-color: #f39c12;
+    color: white;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 
-  .logout-button:hover {
-    background-color: #c9302c;
+  .user-page-button:hover {
+    background-color: #e67e22;
+    transform: scale(1.05);
   }
 
+  /* ログイン・新規登録ボタン */
   .login-button {
     background-color: #007BFF;
   }
@@ -55,6 +66,7 @@
     background-color: #218838;
   }
 
+  /* Googleログインボタン */
   .google-login-button {
     background-color: #db4437;
     color: white;
@@ -67,6 +79,40 @@
 
   .google-login-button:hover {
     background-color: #a33628;
+  }
+
+  /* ログアウトボタン */
+  .logout-button {
+    background-color: #d9534f;
+  }
+
+  .logout-button:hover {
+    background-color: #c9302c;
+  }
+
+  .search-form {
+    margin: 20px 0 40px;
+    text-align: center;
+  }
+
+  .search-form select,
+  .search-form button {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .search-form button {
+    background-color: #0275d8;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .search-form button:hover {
+    background-color: #025aa5;
   }
 
   .games-container {
@@ -110,35 +156,11 @@
   .game-card h3 a:hover {
     color: #014c8c;
   }
-
-  .search-form {
-    margin: 20px 0 40px;
-    text-align: center;
-  }
-
-  .search-form select,
-  .search-form button {
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  .search-form button {
-    background-color: #0275d8;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  .search-form button:hover {
-    background-color: #025aa5;
-  }
 </style>
 
 <div class="auth-buttons">
   <% if logged_in? %>
+    <%= link_to 'マイページ', user_path(current_user), class: 'user-page-button' %>
     <%= link_to 'ログアウト', logout_path, method: :delete, class: 'logout-button' %>
   <% else %>
     <%= link_to "Googleでログイン", auth_at_provider_path(:google), class: 'google-login-button' %>

@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # パスワードリセット関連
+  resources :password_resets, only: [:new, :create, :edit, :update]
+
   # ゲームと投稿関連
   resources :games, only: [:index, :show] do
     resources :posts, only: [:create, :edit, :update, :destroy] do
@@ -16,7 +19,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
 
   # ユーザー登録
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]  # showアクションを追加
 
   # タスク管理
   resources :tasks
@@ -42,5 +45,12 @@ Rails.application.routes.draw do
 
   # トップページ
   root "dashboard#index"
+
+  # 開発環境でのみLetter Openerを有効化
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
 end
+
+
 

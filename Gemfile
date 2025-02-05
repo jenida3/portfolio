@@ -55,6 +55,8 @@ group :development do
   gem "web-console"
 
   gem "rubocop", require: false
+  gem 'letter_opener'
+  gem 'letter_opener_web', group: :development
 end
 
 group :test do
