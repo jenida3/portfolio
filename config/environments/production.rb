@@ -18,7 +18,7 @@ Rails.application.configure do
 
   # ログ設定
   config.logger = ActiveSupport::Logger.new(STDOUT).tap { |logger| logger.formatter = ::Logger::Formatter.new }
-  config.log_tags = [:request_id]
+  config.log_tags = [ :request_id ]
   config.log_level = ENV.fetch("RAILS_LOG_LEVEL", "info")
 
   # キャッシュ設定（任意）
