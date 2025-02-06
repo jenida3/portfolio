@@ -1,44 +1,44 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= content_for(:title) || "TactiZone" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<!-- app/views/layouts/application.html.erb -->
 
-    <!-- OGP設定 -->
-    <meta property="og:title" content="<%= h(content_for(:title) || 'TactiZone') %>">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="<%= request.original_url %>">
-    <meta property="og:image" content="<%= request.base_url + '/images/fps-strategy-map.webp' %>">
-    <meta property="og:description" content="<%= h(content_for(:description) || 'FPS向け情報交換アプリ') %>">
-    <meta property="og:site_name" content="TactiZone">
-    <meta property="og:locale" content="ja_JP">
+<head>
+  <title><%= content_for(:title) || "TactiZone" %></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <!-- Twitterカード設定 -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<%= h(content_for(:title) || 'TactiZone') %>">
-    <meta name="twitter:description" content="<%= h(content_for(:description) || 'FPS向け情報交換アプリ') %>">
-    <meta name="twitter:image" content="<%= request.base_url + '/images/fps-strategy-map.webp' %>">
+  <!-- OGP設定 -->
+  <meta property="og:title" content="<%= h(content_for(:title) || 'TactiZone') %>">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<%= request.original_url %>">
+  <meta property="og:image" content="<%= request.base_url + '/images/fps-strategy-map.webp' %>">
+  <meta property="og:description" content="<%= h(content_for(:description) || 'FPS向け情報交換アプリ') %>">
+  <meta property="og:site_name" content="TactiZone">
+  <meta property="og:locale" content="ja_JP">
 
-    <%= yield :head %>
+  <!-- Twitterカード設定 -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="<%= h(content_for(:title) || 'TactiZone') %>">
+  <meta name="twitter:description" content="<%= h(content_for(:description) || 'FPS向け情報交換アプリ') %>">
+  <meta name="twitter:image" content="<%= request.base_url + '/images/fps-strategy-map.webp' %>">
 
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-  </head>
+  <%= yield :head %>
 
-  <body>
-    <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>">
-        <%= message %>
-      </div>
-    <% end %>
-    
-    <%= yield %>
-  </body>
-</html>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/icon.png" type="image/png">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/icon.png">
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+</head>
+
+<body>
+  <% flash.each do |message_type, message| %>
+    <div class="alert alert-<%= message_type %>">
+      <%= message %>
+    </div>
+  <% end %>
+  
+  <%= yield %>
+</body>
+
