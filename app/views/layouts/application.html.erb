@@ -16,6 +16,12 @@
     <meta property="og:site_name" content="TactiZone">
     <meta property="og:locale" content="ja_JP">
 
+    <!-- Twitterカード設定 -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<%= h(content_for(:title) || 'TactiZone') %>">
+    <meta name="twitter:description" content="<%= h(content_for(:description) || 'FPS向け情報交換アプリ') %>">
+    <meta name="twitter:image" content="<%= request.base_url + '/images/fps-strategy-map.webp' %>">
+
     <%= yield :head %>
 
     <link rel="manifest" href="/manifest.json">
@@ -36,6 +42,3 @@
     <%= yield %>
   </body>
 </html>
-
-
-
