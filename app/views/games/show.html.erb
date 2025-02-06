@@ -1,21 +1,4 @@
-<% content_for :head do %>
-  <!-- OGP設定 -->
-  <meta property="og:title" content="<%= h(@game.title) %>">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="<%= request.original_url %>">
-  <meta property="og:image" content="<%= request.base_url + '/images/fps-strategy-map.webp' %>">
-  <meta property="og:description" content="<%= h(@game.title + 'の掲示板') %>">
-  <meta property="og:site_name" content="TactiZone">
-  <meta property="og:locale" content="ja_JP">
 
-  <!-- Twitterカード設定 -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="<%= h(@game.title) %>">
-  <meta name="twitter:description" content="<%= h(@game.title + 'の掲示板') %>">
-  <meta name="twitter:image" content="<%= request.base_url + '/images/fps-strategy-map.webp' %>">
-<% end %>
-
-<!-- ゲームタイトルと説明 -->
 <h1 style="font-size: 2rem; color: #333; margin-bottom: 20px;"><%= @game.title %></h1>
 <p style="font-size: 1.25rem; color: #555; margin-bottom: 30px;"><%= @game.description %></p>
 
@@ -101,4 +84,5 @@
     }
   });
 </script>
+
 
