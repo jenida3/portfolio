@@ -1,25 +1,24 @@
 <!-- app/views/layouts/application.html.erb -->
-
 <head>
-  <title><%= content_for(:title) || "TactiZone" %></title>
+  <title><%= @page_title || "TactiZone" %></title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
   <!-- OGP設定 -->
-  <meta property="og:title" content="<%= h(content_for(:title) || 'TactiZone') %>">
+  <meta property="og:title" content="<%= h(@page_title || 'TactiZone') %>">
   <meta property="og:type" content="website">
   <meta property="og:url" content="<%= request.original_url %>">
   <meta property="og:image" content="<%= request.base_url + '/images/fps-strategy-map.webp' %>">
-  <meta property="og:description" content="<%= h(content_for(:description) || 'FPS向け情報交換アプリ') %>">
+  <meta property="og:description" content="<%= h(@page_description || 'FPS向け情報交換アプリ') %>">
   <meta property="og:site_name" content="TactiZone">
   <meta property="og:locale" content="ja_JP">
 
   <!-- Twitterカード設定 -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="<%= h(content_for(:title) || 'TactiZone') %>">
-  <meta name="twitter:description" content="<%= h(content_for(:description) || 'FPS向け情報交換アプリ') %>">
+  <meta name="twitter:title" content="<%= h(@page_title || 'TactiZone') %>">
+  <meta name="twitter:description" content="<%= h(@page_description || 'FPS向け情報交換アプリ') %>">
   <meta name="twitter:image" content="<%= request.base_url + '/images/fps-strategy-map.webp' %>">
 
   <%= yield :head %>
@@ -38,7 +37,7 @@
       <%= message %>
     </div>
   <% end %>
-  
+
   <%= yield %>
 </body>
 
