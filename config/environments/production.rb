@@ -25,6 +25,17 @@ Rails.application.configure do
   # config.cache_store = :mem_cache_store
 
   # メール設定
+  config.action_mailer.default_url_options = { host: "tactizone.jp", protocol: "https" }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    domain: "gmail.com",
+    authentication: "plain",
+    user_name: ENV["GMAIL_USERNAME"],
+    password: ENV["GMAIL_APP_PASSWORD"],
+    enable_starttls_auto: true
+  }
   config.action_mailer.perform_caching = false
 
   # I18n設定
